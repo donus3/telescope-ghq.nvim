@@ -4,6 +4,7 @@
 
 [telescope.nvim]: https://github.com/nvim-telescope/telescope.nvim
 [x-motemen/ghq]: https://github.com/x-motemen/ghq
+[nvim-tree]: https://github.com/kyazdani42/nvim-tree.lua
 
 ## Installation
 
@@ -31,12 +32,14 @@ TODO: others
 
 Running `ghq list` and list repositories' paths. In default, it does actions below when you input keys.
 
-| key              | action               |
-|------------------|----------------------|
-| `<CR>` (edit)    | `builtin.git_files`  |
-| `<C-x>` (split)  | `:chdir` to the dir  |
-| `<C-v>` (vsplit) | `:lchdir` to the dir |
-| `<C-t>` (tabnew) | `:tchdir` to the dir |
+| key              | action                   |
+|------------------|--------------------------|
+| `<CR>` (edit)    | `builtin.git_files`      |
+| `<C-x>` (split)  | `:chdir` to the dir      |
+| `<C-v>` (vsplit) | `:lchdir` to the dir     |
+| `<C-t>` (tabnew) | `:tchdir` to the dir     |
+| `<C-o>`          | `:chdir` to the dir and focus the [nvim-tree][]  |
+
 
 #### options
 

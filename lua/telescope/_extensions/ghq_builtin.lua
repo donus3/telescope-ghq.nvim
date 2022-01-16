@@ -9,6 +9,7 @@ local pickers = require'telescope.pickers'
 local previewers = require'telescope.previewers'
 local utils = require'telescope.utils'
 local Path = require'plenary.path'
+local _action = require'telescope._extensions.actions'
 
 local os_home = vim.loop.os_homedir()
 
@@ -74,6 +75,20 @@ local function gen_from_ghq(opts)
   end
 end
 
+-- local function chdir(dir)
+  -- vim.cmd('cd '..dir)
+  -- print('chdir to '..dir)
+-- end
+
+local ch_dir = function(prompt_bufnr)
+	local selection = action_state.get_selected_entry(prompt_bufnr)
+	actions.close(prompt_bufnr)
+	if selection.id == "" then
+		return
+	end
+	print("Requested rerun of run: ", selection.id)
+end
+
 M.list = function(opts)
   opts = opts or {}
   opts.bin = opts.bin and vim.fn.expand(opts.bin) or 'ghq'
@@ -110,8 +125,11 @@ M.list = function(opts)
       end,
     },
     sorter = conf.file_sorter(opts),
-    attach_mappings = function(prompt_bufnr)
+    attach_mappings = function(prompt_bufnr, map)
+      map('i', '<C-o>', _action.change_dir )
+
       actions_set.select:replace(function(_, type)
+        print('action type' ..type)
         local entry = actions_state.get_selected_entry()
         local dir = from_entry.path(entry)
         if type == 'default' then
